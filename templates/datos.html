@@ -1,0 +1,17 @@
+<html>
+    <head>
+        {% load static %}
+        <link href="{%static 'miestilo.css'%}" rel="stylesheet"/>
+    </head>
+    <body>
+        <h1>
+            Esta es la lista de jugadores
+        </h1>
+        <ul>
+            {% for j in lista_jugadores %}
+            <li>{{j.userId}} : {{j.minutosJugados}} </li>
+            {% endfor%}
+        </ul>
+        
+    </body>
+</html>
