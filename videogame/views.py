@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from json import loads,dumps
 import collections
 import sqlite3
+from django.http import Http404
 
 # Create your views here.
 def index(request):
@@ -110,6 +111,29 @@ def usertopscores(request):
     rows = cur.execute(stringSQL,(str(usuario),))
     if rr == None:
         j = '{"error":"No records for this user_id"}'
+    else:
+        lista_salida = []
+        for r in rows:
+            print(r)
+            d = {}
+            d["id"] = r[0]
+            d["username"] = r[1]
+            d["score"] = r[3]
+            lista_salida.append(d)
+        j = dumps(lista_salida)
+    return HttpResponse(j, content_type="text/json-comment-filtered")
+
+def usertopscores2(request):
+    usuario = request.GET['user_id']
+    mydb = sqlite3.connect("db.sqlite3")
+    cur = mydb.cursor()
+    stringSQL = '''SELECT id, user_id, session_id, total_score, 
+    time_played, date_Created FROM party WHERE user_id=?'''
+    rows = cur.execute(stringSQL,(str(usuario),))
+    rr = rows.fetchone()
+    rows = cur.execute(stringSQL,(str(usuario),))
+    if rr == None:
+        raise Http404("user_id does not exist")
     else:
         lista_salida = []
         for r in rows:
