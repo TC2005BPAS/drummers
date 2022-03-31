@@ -145,3 +145,6 @@ def usertopscores2(request):
             lista_salida.append(d)
         j = dumps(lista_salida)
     return HttpResponse(j, content_type="text/json-comment-filtered")
+
+def main(request):
+    return render(request,'main.html')

@@ -13,4 +13,5 @@ urlpatterns = [path('', views.index, name='index'),
     path('unity',views.unity, name='unity'),
     path('busca',views.buscaUsuario, name='buscaUsuario'),
     path('lista',views.listaUsuarios, name='listaUsuarios'),
+    path('main',views.main, name='main'),
 ]
