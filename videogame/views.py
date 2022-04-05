@@ -1,3 +1,4 @@
+from random import randrange
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from . models import TopScore
@@ -148,3 +149,26 @@ def usertopscores2(request):
 
 def main(request):
     return render(request,'main.html')
+
+def grafica1(request):
+    h_var = 'X'
+    v_var = 'Y'
+    data = [[h_var,v_var]]
+    for i in range(0,11):
+        data.append([randrange(101),randrange(101)])
+    h_var_JSON = dumps(h_var)
+    v_var_JSON = dumps(v_var)
+    modified_data = dumps(data)
+    return render(request,"grafica1.html",{'values':modified_data,\
+    'h_title':h_var_JSON,'v_title':v_var_JSON})
+
+def grafica(request):
+    h_var = 'X'
+    v_var = 'Y'
+    data = [[h_var,v_var]]
+    for i in range(0,11):
+        data.append([randrange(101),randrange(101)])
+    h_var_json = dumps(h_var)
+    v_var_json = dumps(v_var)
+    datos_json = dumps(data)
+    return render(request,'grafica.html',{'values':datos_json,'h_title':h_var_json,'v_title':v_var_json})

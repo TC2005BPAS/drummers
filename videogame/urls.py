@@ -14,4 +14,6 @@ urlpatterns = [path('', views.index, name='index'),
     path('busca',views.buscaUsuario, name='buscaUsuario'),
     path('lista',views.listaUsuarios, name='listaUsuarios'),
     path('main',views.main, name='main'),
+    path('grafica1',views.grafica1, name='grafica1'),
+    path('grafica',views.grafica, name='grafica'),
 ]
