@@ -1,5 +1,5 @@
 from unicodedata import name
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 
@@ -16,4 +16,9 @@ urlpatterns = [path('', views.index, name='index'),
     path('main',views.main, name='main'),
     path('grafica1',views.grafica1, name='grafica1'),
     path('grafica',views.grafica, name='grafica'),
+    path('privada',views.privada, name='privada'),
+]
+
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

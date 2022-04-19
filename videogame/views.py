@@ -7,6 +7,7 @@ from json import loads,dumps
 import collections
 import sqlite3
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -172,3 +173,32 @@ def grafica(request):
     v_var_json = dumps(v_var)
     datos_json = dumps(data)
     return render(request,'grafica.html',{'values':datos_json,'h_title':h_var_json,'v_title':v_var_json})
+
+@login_required
+def privada(request):
+    usuario = request.user
+    print(usuario)
+    return HttpResponse('Hola')
+    """
+    mydb = sqlite3.connect("db.sqlite3")
+    cur = mydb.cursor()
+    stringSQL = '''SELECT id, user_id, session_id, total_score, 
+    time_played, date_Created FROM party WHERE django_user=?'''
+    rows = cur.execute(stringSQL,(str(usuario),))
+    rr = rows.fetchone()
+    rows = cur.execute(stringSQL,(str(usuario),))
+    if rr == None:
+        raise Http404("user_id does not exist")
+    else:
+        lista_salida = []
+        for r in rows:
+            print(r)
+            d = {}
+            d["id"] = r[0]
+            d["username"] = r[1]
+            d["score"] = r[3]
+            lista_salida.append(d)
+        j = dumps(lista_salida)
+    return HttpResponse(j, content_type="text/json-comment-filtered")
+    """
+    
