@@ -178,8 +178,7 @@ def grafica(request):
 def privada(request):
     usuario = request.user
     print(usuario)
-    return HttpResponse('Hola')
-    """
+    
     mydb = sqlite3.connect("db.sqlite3")
     cur = mydb.cursor()
     stringSQL = '''SELECT id, user_id, session_id, total_score, 
@@ -200,5 +199,5 @@ def privada(request):
             lista_salida.append(d)
         j = dumps(lista_salida)
     return HttpResponse(j, content_type="text/json-comment-filtered")
-    """
+
     
