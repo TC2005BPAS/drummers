@@ -174,6 +174,7 @@ def grafica(request):
     datos_json = dumps(data)
     return render(request,'grafica.html',{'values':datos_json,'h_title':h_var_json,'v_title':v_var_json})
 
+#esta es una página privada
 @login_required
 def privada(request):
     usuario = request.user
